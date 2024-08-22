@@ -80,7 +80,7 @@ app.use('/api/cart', jwtAuth, cartRoutes);
 
 
 app.get('/', (req, res) => {
-  res.send("Hello from Nodejs");
+  res.send("Hello from Nodejs!");
 })
 
 // 404 error handling using middleware
