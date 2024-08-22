@@ -1,0 +1,104 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "description": "API for E-commerce application",
+        "title": "E-commerce API"
+    },
+    "host": "localhost:3000",
+    "securityDefinitions": {
+        "JWT": {
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
+        }
+    },
+    "basePath": "/api",
+    "schemes":"http",
+    "paths":{
+        "/user/login": {
+            "post": {
+                "summary": "login user and generate token",
+                "description": "generates token",
+                "tags": ["users"],
+                "parameters": [{
+                    "in": "body",
+                    "name": "user credentials",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "email": {
+                                "type": "string"
+                            },
+                            "password": {
+                                "type": "string"
+                            }
+                        }
+                    }
+
+                }],
+                "produces":"application/json",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/user/signup": {
+            "post": {
+                "summary": "create user",
+                "description": "generates token",
+                "tags": ["users"],
+                "parameters": [{
+                    "in": "body",
+                    "name": "user credentials",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string",
+                                "enum": ["customer", "seller"]
+                            },
+                            "password": {
+                                "type": "string"
+                            }
+                        }
+                    }
+
+                }],
+                "produces":"application/json",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/product": {
+            "get": {
+                "tags": ["products"],
+                "summary": "get all product",
+                "description": "get all products data having product details",
+                "produces":"application/json",
+                "security": [{
+                    "JWT": {}
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    }
+}
